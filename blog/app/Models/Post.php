@@ -23,7 +23,7 @@ class Post extends Model
 
     public function tags(){
 
-        return  $this->belonToMany(Tag::class);
+        return  $this->belongsToMany(Tag::class);
     }
 
     // Relacion muchos a muchos polimorfica
