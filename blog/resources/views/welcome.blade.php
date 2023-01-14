@@ -1,4 +1,16 @@
-<!DOCTYPE html>
+
+<x-app-layout>
+    
+<h1>Hola mundo</h1>
+
+
+
+
+
+
+</x-app-layout>
+
+{{--  <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
@@ -130,3 +142,4 @@
         </div>
     </body>
 </html>
+  --}}
