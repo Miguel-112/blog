@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Http\Request;
 
 use App\Models\Post;
+use App\Models\Tag;
 
 class PostController extends Controller
 {
@@ -41,6 +42,15 @@ class PostController extends Controller
 
 
         return view('posts.category', compact('posts','category'));
+
+    }
+
+
+    public function tag(Tag $tag){
+
+        $posts = $tag->posts()->where('status',2)->latest('id')->paginate(4);
+
+        return view('posts.tag', compact('posts', 'tag'));
 
     }
 }
