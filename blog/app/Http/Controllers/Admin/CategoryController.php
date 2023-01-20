@@ -16,10 +16,10 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //  $categories= Category::all();
+          $categories= Category::all();
 
 
-        return view('admin.categories.index');
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
@@ -29,7 +29,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.categories.index');
+        return view('admin.categories.create');
     }
 
     /**
@@ -40,7 +40,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'slug'=>'required|unique:categories'
+
+        ]);
+      $category = Category::create($request->all());
+
+      return redirect()->route('admin.categories.edit', $category )->with('info', ' se creo la categoria correctamente');
     }
 
     /**
@@ -57,34 +64,47 @@ class CategoryController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $category
+     * @param  int  id
      * @return \Illuminate\Http\Response
      */
     public function edit(Category $category)
     {
         return view('admin.categories.edit', compact('category'));
+        
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $category
+     * @param  int  id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request,Category $category)
+    public function update(Request $request ,  Category $category)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'slug'=>"required|unique:categories,slug,$category->id"
+
+        ]);
+
+         $category->update($request->all());
+
+         return redirect()->route('admin.categories.edit', $category )->with('info', 'La categoria se actualizo con exito');
+
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $category
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy(Category  $category)
     {
-        //
+        $category->delete();
+
+        return redirect()->route('admin.categories.index')->with('info', 'La categoria se elimino con exito');
+
     }
 }

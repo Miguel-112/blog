@@ -17,8 +17,15 @@ class Category extends Model
     use HasFactory;
 
     protected static function newFactory()
+
+    
     {
         return  CategoryFactory::new();
+    }
+    protected $fillable = ['name','slug'];
+
+    public function getRouteKeyName()
+    {return "slug";
     }
 
      
