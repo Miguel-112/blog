@@ -1,11 +1,21 @@
 @extends('adminlte::page')
 
 @section('content_header')
+
+
 <a class="btn btn-secondary btn-sm float-right" href="{{route('admin.tags.create')}}">Nueva etiqueta</a>
 <h1>Mostrar listado de etiqueta</h1>
 @stop
 
 @section('content')
+
+@if(session('info'))
+      
+      <div class="alert alert-success">
+          <strong>{{session('info')}}</strong>
+      </div>
+    
+  @endif
 <div class="card">
     <div class="card-body">
 

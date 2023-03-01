@@ -315,73 +315,34 @@ return [
             'text'        => 'DashBoard',
             'route'         => 'admin.home',
             'icon'        => 'fas fa-tachometer-alt fa.fw ',
-           
+
         ],
         ['header' => 'Administrador'],
         [
             'text' => 'categorias',
             'route'  => 'admin.categories.index',
             'icon' => 'fab fa-fw fa-buffer',
+            'active' => ['admin/categories*']
         ],
         [
             'text' => 'Etiquetas',
             'route'  => 'admin.tags.index',
             'icon' => 'far fa-fw fa-bookmark',
+            'active' => ['admin/tags*']
+        ],
+
+        ['header' => 'OPCIONES DE BLOG'],
+        [
+            'text'       => 'Lista de post',
+            'route'        => 'admin.posts.index',
+            'icon'       => 'fas fa-fw fa-clipboard'
         ],
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
-            'submenu' => [
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-            ],
+            'text'       => 'Crear nuevo post',
+            'route'        => 'admin.posts.create',
+            'icon'       => 'fas fa-fw fa-file'
         ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+
     ],
 
     /*
@@ -536,5 +497,5 @@ return [
     |
     */
 
-    'livewire' => false,
+    'livewire' => true,
 ];

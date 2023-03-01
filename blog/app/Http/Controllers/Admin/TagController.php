@@ -57,14 +57,14 @@ class TagController extends Controller
         
      $tag = Tag::create($request->all());
 
-     return redirect()->route('admin.tags.edit', compact('tag'));
+     return redirect()->route('admin.tags.edit', compact('tag'))->with('info', 'La etiqueta se creo con exito');
         
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int  Post $post
      * @return \Illuminate\Http\Response
      */
     public function show($tag)
@@ -75,7 +75,7 @@ class TagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  Post $post
      * @return \Illuminate\Http\Response
      */
     public function edit($tag)
@@ -97,24 +97,35 @@ class TagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  int  Post $post
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $tag)
+    public function update(Request $request, Tag $tag)
     {
-        return 
-        $request->all();
+        $request->validate([
+            'name'=>'required',
+            'slug'=>"required|unique:tags,slug,$tag->id",
+            'color'=>'required'
+            
+          ]);
+
+         $tag->update($request->all());
+
+         return redirect()->route('admin.tags.edit', $tag )->with('info', 'La etiqueta se actualizo con exito');
+        // return 
+        // $request->all();
         
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  int  Post $post
      * @return \Illuminate\Http\Response
      */
-    public function destroy($tag)
+    public function destroy(Tag $tag)
     {
-        //
+        $tag->delete();
+        return redirect()->route('admin.tags.index')->with('info', 'La etiqueta se elimino con exito');
     }
 }

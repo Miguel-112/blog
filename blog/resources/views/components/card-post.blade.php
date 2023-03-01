@@ -5,7 +5,14 @@
 
 <article class="mb-6 bg-white shadow-lg rounded-r-lg overflow-hidden">
 
-    <img class="w-full h-72 object-cover object-center" src="{{Storage::url($post->image->url )}}" alt="">
+   @if ($post->image)
+   <img class="w-full h-72 object-cover object-center" src="{{Storage::url($post->image->url )}}" alt="">
+   @else
+
+   <img class="w-full h-72 object-cover object-center" src="https://cdn.pixabay.com/photo/2015/12/01/20/28/road-1072821_1280.jpg" alt="">
+    
+       
+   @endif
 
     <div class="px-6 py-4">
 
@@ -13,7 +20,7 @@
             <a href="{{route('posts.show', $post)}}">{{$post->name }}</a>
         </h1>
         <div class="text-gray-700 text-base">
-            {{$post->extract}}
+            {!! $post->extract !!}
         </div>
     </div>
 
